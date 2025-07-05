@@ -43,13 +43,28 @@ export class Books implements OnInit {
     });
   }
 
-  editBook(id: number, title: string, author: string) {
-    const updatedBook = { title, author };
-    this.http.put(`http://localhost:5234/books/${id}`, updatedBook, this.getAuthHeaders()).subscribe({
-      next: () => this.loadBooks(),
-      error: () => alert('Failed to update book'),
+  editBookId: number | null = null;
+  editTitle = '';
+  editAuthor = '';
+
+  startEdit(book: any) {
+    this.editBookId = book.id;
+    this.editTitle = book.title;
+    this.editAuthor = book.author;
+  }
+
+  saveEdit(id: number) {
+    const updatedBook = { title: this.editTitle, author: this.editAuthor };
+    this.http.put(`http://localhost:5234/books/${id}`, updatedBook, this.getAuthHeaders()).subscribe(() => {
+      this.editBookId = null;
+      this.loadBooks();
     });
   }
+
+  cancelEdit() {
+    this.editBookId = null;
+  }
+
   deleteBook(id: number) {
   this.http.delete(`http://localhost:5234/books/${id}`, this.getAuthHeaders()).subscribe({
     next: () => this.loadBooks(),
