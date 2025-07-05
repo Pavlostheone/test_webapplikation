@@ -4,6 +4,15 @@ using System.Text;                      // required for Encoding
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 // Add services to the container
 builder.Services.AddControllers(); // Enables controller routing
 
@@ -26,6 +35,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseCors("AllowAll"); // Enable CORS for all origins, methods, headers
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())

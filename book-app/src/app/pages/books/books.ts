@@ -42,6 +42,14 @@ export class Books implements OnInit {
       this.loadBooks();
     });
   }
+
+  editBook(id: number, title: string, author: string) {
+    const updatedBook = { title, author };
+    this.http.put(`http://localhost:5234/books/${id}`, updatedBook, this.getAuthHeaders()).subscribe({
+      next: () => this.loadBooks(),
+      error: () => alert('Failed to update book'),
+    });
+  }
   deleteBook(id: number) {
   this.http.delete(`http://localhost:5234/books/${id}`, this.getAuthHeaders()).subscribe({
     next: () => this.loadBooks(),

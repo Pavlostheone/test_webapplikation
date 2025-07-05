@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
-  template: `
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/books">BookApp</a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" routerLink="/books">Books</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="/quotes">Quotes</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="/login">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <router-outlet></router-outlet>
-  `,
-  imports: [CommonModule, RouterModule],
+  templateUrl: './app.html',
 })
-export class App {}
+export class AppComponent {
+  toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('dark-theme');
+
+    // Save preference
+    const isDark = body.classList.contains('dark-theme');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+
+  ngOnInit() {
+    // Load preference on app start
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    }
+  }
+}
