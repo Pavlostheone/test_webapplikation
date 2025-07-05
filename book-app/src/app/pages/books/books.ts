@@ -43,6 +43,18 @@ export class Books implements OnInit {
     });
   }
 
+ import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  standalone: true,
+  selector: 'app-edit-book',
+  templateUrl: './edit-book.html',
+  imports: [CommonModule, FormsModule], 
+})
+export class EditBook {
+  books: any[] = [];
   editBookId: number | null = null;
   editTitle = '';
   editAuthor = '';
@@ -54,21 +66,21 @@ export class Books implements OnInit {
   }
 
   saveEdit(id: number) {
-    const updatedBook = { title: this.editTitle, author: this.editAuthor };
-    this.http.put(`http://localhost:5234/books/${id}`, updatedBook, this.getAuthHeaders()).subscribe(() => {
-      this.editBookId = null;
-      this.loadBooks();
-    });
+    const book = this.books.find(b => b.id === id);
+    if (book) {
+      book.title = this.editTitle;
+      book.author = this.editAuthor;
+      this.cancelEdit();
+    }
   }
 
   cancelEdit() {
     this.editBookId = null;
+    this.editTitle = '';
+    this.editAuthor = '';
   }
 
   deleteBook(id: number) {
-  this.http.delete(`http://localhost:5234/books/${id}`, this.getAuthHeaders()).subscribe({
-    next: () => this.loadBooks(),
-    error: () => alert('Failed to delete book'),
-  });
+    this.books = this.books.filter(b => b.id !== id);
   }
 }
