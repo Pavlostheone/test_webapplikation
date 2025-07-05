@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend/BookApi
+        working-directory: backend/bookApi
     steps:
       - uses: actions/checkout@v3
 
