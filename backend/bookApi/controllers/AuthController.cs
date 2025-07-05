@@ -23,7 +23,7 @@ namespace bookApi.Controllers
                 new Claim(ClaimTypes.Name, request.Username),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super_secret_dev_key"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super_secret_dev_key_which_is_longer_1234"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
