@@ -32,7 +32,7 @@ jobs:
       - name: Zip build artifacts
         run: |
           cd frontend/book-quotes/dist/book-quotes
-          zip -r ../../../angular-build.zip .
+          zip -r ../../../../angular-build.zip .
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
