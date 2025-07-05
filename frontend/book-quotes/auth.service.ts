@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root'})
 export class AuthService{
-  private apiUrl = "https://localhost:2424"; 
+  private apiUrl = "https://localhost:2424";
   constructor(private http: HttpClient, private router: Router) { }
 
   login(credentials: { username: string, password: string }) {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+    // The backend AuthController expects requests at /auth/login
+    // rather than /login, so adjust the path accordingly.
+    return this.http.post(`${this.apiUrl}/auth/login`, credentials);
   }
 
   logout() {
