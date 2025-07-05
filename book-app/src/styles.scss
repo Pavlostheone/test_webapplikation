@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+body.dark-theme {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark-theme .navbar {
+  background-color: #333 !important;
+}
+
+body.dark-theme .card, body.dark-theme input, body.dark-theme textarea {
+  background-color: #1e1e1e;
+  color: #eee;
+}
