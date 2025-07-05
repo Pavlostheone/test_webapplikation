@@ -1,4 +1,3 @@
-
 name: Build and deploy Angular app to Azure Web App - testet
 
 on:
@@ -14,30 +13,29 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js version
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.19.0'
+          node-version: '20.x'
 
-
-      - name: Install and build Angular app
+      - name: Install dependencies
         run: |
           cd frontend/book-quotes
           npm ci
+
+      - name: Build Angular app
+        run: |
+          cd frontend/book-quotes
           npm run build -- --configuration production
 
-      - name: Zip build output for deployment
-        run: |
-          cd frontend/book-quotes/dist/book-quotes
-          zip -r ../../../release.zip ./
-
-      - name: Upload artifact for deployment job
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: angular-app
-          path: release.zip
+          path: frontend/book-quotes/dist/book-quotes
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,9 +47,6 @@ jobs:
         with:
           name: angular-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -62,4 +57,4 @@ jobs:
         with:
           app-name: 'testet'
           slot-name: 'Production'
-          package: .
+          package: angular-app
