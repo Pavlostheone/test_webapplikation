@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+
 
 interface Book {
   id: number;
@@ -25,7 +27,7 @@ export class Books implements OnInit {
   editAuthor = '';
   newTitle = '';
   newAuthor = '';
-  apiUrl = 'http://localhost:5234';
+  apiUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 

@@ -3,6 +3,7 @@ import { RouterModule, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   standalone: true,
@@ -18,7 +19,7 @@ export class Login {
 
   login() {
     const body = { username: this.username, password: this.password };
-    this.http.post<any>('http://localhost:5234/auth/login', body).subscribe({
+    this.http.post<any>(`${environment.apiBaseUrl}/auth/login`, body).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/books']);
