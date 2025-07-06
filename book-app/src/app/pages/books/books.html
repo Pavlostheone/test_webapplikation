@@ -14,3 +14,9 @@
     </div>
   </li>
 </ul>
+<div class="mt-4">
+  <input [(ngModel)]="newTitle" placeholder="New Book Title" class="form-control mb-2">
+  <input [(ngModel)]="newAuthor" placeholder="New Book Author" class="form-control mb-2">
+  <button class="btn btn-success btn-sm" (click)="addBook()">Add Book</button>
+</div>
+
