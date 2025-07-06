@@ -4,7 +4,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register one CORS policy for Netlify
+// ✅ Add a CORS policy for your Netlify frontend BEFORE builder.Build()
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNetlify", policy =>
@@ -12,11 +12,11 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("https://zingy-kheer-9240ae.netlify.app")
               .AllowAnyMethod()
               .AllowAnyHeader()
-              .AllowCredentials();
+              .AllowCredentials(); // optional, keep only if you need cookies or auth
     });
 });
 
-// Add services to the container
+// ✅ Add services: controllers, JWT, authorization
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication("Bearer")
@@ -29,7 +29,7 @@ builder.Services.AddAuthentication("Bearer")
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("super_secret_dev_key_which_is_longer_1234"))
+                Encoding.UTF8.GetBytes("super_secret_dev_key_which_is_longer_1234")) // Replace for prod
         };
     });
 
@@ -39,7 +39,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Apply CORS globally so it works in production too
+// ✅ Apply CORS policy before authentication
 app.UseCors("AllowNetlify");
 
 if (app.Environment.IsDevelopment())
@@ -48,13 +48,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/", () => "Welcome to bookApi! Visit /swagger for API docs.");
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(); // needed for /auth/login etc.
 
 app.Run();
