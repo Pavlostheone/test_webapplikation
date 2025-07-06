@@ -8,7 +8,7 @@ import { routes } from './app.routes';
   templateUrl: './app.html',
   imports: [
     CommonModule,
-    RouterModule,  // ✅ correct: router + routes
+    RouterModule,  
   ],
 
 })

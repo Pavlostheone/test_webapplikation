@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:5234';
+  private apiUrl = 'https://mybookapi-beafd4dtf4gbg3eg.westeurope-01.azurewebsites.net/api';
 
   constructor(private http: HttpClient, private router: Router) {}
 
