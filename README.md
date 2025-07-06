@@ -15,6 +15,8 @@ BookApp är en fullstack webbapplikation byggd som en testuppgift för att visa 
 
 ## Inloggningsuppgifter för test
 
+https://zingy-kheer-9240ae.netlify.app
+
 - Användarnamn: `admin`
 - Lösenord: `password`
 
