@@ -40,3 +40,8 @@ C:\Users\danup\test_webapplikation\backend\bookApi\obj\Debug\net8.0\refint\bookA
 C:\Users\danup\test_webapplikation\backend\bookApi\obj\Debug\net8.0\bookApi.pdb
 C:\Users\danup\test_webapplikation\backend\bookApi\obj\Debug\net8.0\bookApi.genruntimeconfig.cache
 C:\Users\danup\test_webapplikation\backend\bookApi\obj\Debug\net8.0\ref\bookApi.dll
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\web.config
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\appsettings.Development.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\appsettings.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\bookApi.deps.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\bookApi.runtimeconfig.json

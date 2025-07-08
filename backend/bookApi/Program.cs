@@ -42,16 +42,20 @@ var app = builder.Build();
 // ✅ Apply CORS policy before authentication
 app.UseCors("AllowNetlify");
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "bookApi v1");
+    c.RoutePrefix = "swagger"; // optional, sets it at /swagger
+});
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers(); // needed for /auth/login etc.
+
+app.MapFallbackToFile("index.html");
 
 app.Run();
