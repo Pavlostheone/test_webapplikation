@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -13,8 +14,17 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/auth/login`, credentials);
   }
 
+  register(credentials: { username: string; password: string }) {
+  return this.http.post<{ token: string }>(`${this.apiUrl}/auth/register`, credentials).pipe(
+    tap(response => {
+      this.setToken(response.token);
+    })
+  );
+  }
+
   logout() {
     return this.http.post(`${this.apiUrl}/auth/logout`, {}).subscribe(() => {
+      localStorage.removeItem('token');
       this.router.navigate(['/login']);
     });
   }

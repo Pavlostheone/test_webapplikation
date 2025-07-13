@@ -1,6 +1,18 @@
-<div class="container mt-5">
-  <h2>Mina citat</h2>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let quote of quotes">{{ quote }}</li>
-  </ul>
+<h2>Quotes</h2>
+<ul>
+  <li *ngFor="let quote of quotes; let i = index">
+    {{ quote }}
+    <button (click)="editQuote(i)">Edit</button>
+  </li>
+</ul>
+
+<div>
+  <input [(ngModel)]="editedQuote" placeholder="Enter quote" />
+
+  <button *ngIf="editingIndex === null" (click)="addQuote()">Add Quote</button>
+
+  <div *ngIf="editingIndex !== null">
+    <button (click)="saveEditedQuote()">Save</button>
+    <button (click)="cancelEdit()">Cancel</button>
+  </div>
 </div>

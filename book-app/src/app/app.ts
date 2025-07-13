@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { routes } from './app.routes';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -29,4 +31,34 @@ export class AppComponent {
       document.body.classList.add('dark-theme');
     }
   }
+  // Add a method to navigate to the login page
+  constructor(private router: Router) {}
+  isAuthenticated(): boolean {
+  return !!localStorage.getItem('token');
+}
+
+getUsername(): string | null {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload?.name || payload?.sub || null;
+  } catch {
+    return null;
+  }
+}
+
+logout(): void {
+  localStorage.removeItem('token');
+  this.router.navigate(['/login']);
+}
+
+goToLogin(): void {
+  this.router.navigate(['/login']);
+}
+
+goToRegister(): void {
+  this.router.navigate(['/register']);
+}
+
 }
