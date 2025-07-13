@@ -1,64 +1,35 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { routes } from './app.routes';
-import { Router } from '@angular/router';
-
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   templateUrl: './app.html',
-  imports: [
-    CommonModule,
-    RouterModule,  
-  ],
-
+  imports: [CommonModule, RouterModule],
 })
 export class AppComponent {
-  toggleTheme() {
-    const body = document.body;
-    body.classList.toggle('dark-theme');
+  constructor(public auth: AuthService, private router: Router) {
+    this.applySavedTheme();
+  }
 
-    // Save preference
-    const isDark = body.classList.contains('dark-theme');
+  /* ----------  THEME ---------- */
+  toggleTheme(): void {
+    const body = document.body;
+    const isDark = body.classList.toggle('dark-theme');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
-  ngOnInit() {
-    // Load preference on app start
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-    }
+  private applySavedTheme(): void {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.body.classList.add('dark-theme');
   }
-  // Add a method to navigate to the login page
-  constructor(private router: Router) {}
-  isAuthenticated(): boolean {
-  return !!localStorage.getItem('token');
-}
 
-getUsername(): string | null {
-  const token = localStorage.getItem('token');
-  if (!token) return null;
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload?.name || payload?.sub || null;
-  } catch {
-    return null;
-  }
+  /* ----------  AUTH ---------- */
+  logout(): void           { this.auth.logout(); }
+  goToLogin(): void        { this.router.navigate(['/login']); }
+  goToRegister(): void     { this.router.navigate(['/register']); }
+  getUsername(): string|null { return this.auth.getUsername(); }
 }
-
-logout(): void {
-  localStorage.removeItem('token');
-  this.router.navigate(['/login']);
-}
-
-goToLogin(): void {
-  this.router.navigate(['/login']);
-}
-
-goToRegister(): void {
-  this.router.navigate(['/register']);
-}
-
-}
+  

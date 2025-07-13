@@ -4,29 +4,27 @@ import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
 import { tap } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthService {
   private apiUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: { username: string; password: string }) {
-    return this.http.post(`${this.apiUrl}/auth/login`, credentials);
+    return this.http.post<{ token: string }>(`${this.apiUrl}/auth/login`, credentials).pipe(
+      tap(response => this.setToken(response.token))
+    );
   }
 
   register(credentials: { username: string; password: string }) {
-  return this.http.post<{ token: string }>(`${this.apiUrl}/auth/register`, credentials).pipe(
-    tap(response => {
-      this.setToken(response.token);
-    })
-  );
+    return this.http.post<{ token: string }>(`${this.apiUrl}/auth/register`, credentials).pipe(
+      tap(response => this.setToken(response.token))
+    );
   }
 
-  logout() {
-    return this.http.post(`${this.apiUrl}/auth/logout`, {}).subscribe(() => {
-      localStorage.removeItem('token');
-      this.router.navigate(['/login']);
-    });
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
   setToken(token: string): void {
@@ -38,6 +36,18 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!this.getToken();
+  }
+
+  getUsername(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload?.unique_name || payload?.name || null;
+    } catch {
+      return null;
+    }
   }
 }
