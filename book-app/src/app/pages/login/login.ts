@@ -22,6 +22,7 @@ export class Login {
     this.http.post<any>(`${environment.apiBaseUrl}/auth/login`, body).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.token);
+        localStorage.setItem('username', this.username);
         this.router.navigate(['/books']);
       },
       error: () => alert('Invalid credentials'),

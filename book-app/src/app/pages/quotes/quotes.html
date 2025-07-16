@@ -1,18 +1,29 @@
 <h2>Quotes</h2>
+
 <ul>
   <li *ngFor="let quote of quotes; let i = index">
     {{ quote }}
     <button (click)="editQuote(i)">Edit</button>
+    <button (click)="deleteQuote(i)">Delete</button>
   </li>
 </ul>
 
-<div>
-  <input [(ngModel)]="editedQuote" placeholder="Enter quote" />
+<!-- Textarea for adding or editing -->
+<div style="margin-top: 20px;">
+  <textarea
+    [(ngModel)]="editedQuote"
+    placeholder="Enter your quote here"
+    rows="4"
+    cols="50"
+    style="width: 100%; resize: vertical;"
+  ></textarea>
+</div>
 
-  <button *ngIf="editingIndex === null" (click)="addQuote()">Add Quote</button>
-
-  <div *ngIf="editingIndex !== null">
-    <button (click)="saveEditedQuote()">Save</button>
-    <button (click)="cancelEdit()">Cancel</button>
-  </div>
+<!-- Controls depending on edit state -->
+<div *ngIf="editingIndex === null">
+  <button (click)="addQuote()">Add Quote</button>
+</div>
+<div *ngIf="editingIndex !== null">
+  <button (click)="saveEdit()">Save</button>
+  <button (click)="cancelEdit()">Cancel</button>
 </div>

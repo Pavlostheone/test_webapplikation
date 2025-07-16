@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '.../../../src/app/auth.service';
+import { AuthService } from '@app/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,10 +17,21 @@ export class RegisterComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  register(): void {
-    this.auth.register({ username: this.username, password: this.password }).subscribe({
-      next: () => this.router.navigate(['/quotes']),
-      error: () => this.error = 'Registration failed. Try another username.'
-    });
-  }
+    register() {
+      this.auth.register({
+        username: this.username,
+        password: this.password
+      }).subscribe({
+        next: () => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('username');
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          this.error = 'Registration failed';
+        }
+      });
+}
+
+
 }

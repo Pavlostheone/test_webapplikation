@@ -7,10 +7,10 @@ using System.Text;
 namespace bookApi.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        // 🧠 In-memory user list 
+        // In-memory user list
         private static List<User> users = new()
         {
             new User { Username = "admin", Password = "password" }

@@ -10,7 +10,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNetlify", policy =>
     {
-        policy.WithOrigins("https://zingy-kheer-9240ae.netlify.app")
+        policy.WithOrigins("https://zingy-kheer-9240ae.netlify.app","http://localhost:4200")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials(); // optional, keep only if you need cookies or auth

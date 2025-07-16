@@ -14,15 +14,17 @@ export class AppComponent {
     this.applySavedTheme();
   }
 
+  public localStorage = localStorage;
+  public window = window;
   /* ----------  THEME ---------- */
   toggleTheme(): void {
     const body = document.body;
     const isDark = body.classList.toggle('dark-theme');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    this.localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
   private applySavedTheme(): void {
-    const saved = localStorage.getItem('theme');
+    const saved = this.localStorage.getItem('theme');
     if (saved === 'dark') document.body.classList.add('dark-theme');
   }
 
