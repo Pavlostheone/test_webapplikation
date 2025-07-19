@@ -45,3 +45,13 @@ C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\apps
 C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\appsettings.json
 C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\bookApi.deps.json
 C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\bookApi.runtimeconfig.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\publish\web.config
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\web.config
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\appsettings.Development.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\appsettings.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\bookApi.deps.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\bookApi.runtimeconfig.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\publish\appsettings.Development.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\publish\appsettings.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\publish\bookApi.deps.json
+C:\Users\danup\test_webapplikation\backend\bookApi\bin\Debug\net8.0\publish\publish\publish\bookApi.runtimeconfig.json

@@ -3,8 +3,8 @@
 <ul>
   <li *ngFor="let quote of quotes; let i = index">
     {{ quote }}
-    <button (click)="editQuote(i)">Edit</button>
-    <button (click)="deleteQuote(i)">Delete</button>
+    <button class="btn btn-warning btn-sm mr-2" (click)="editQuote(i)">Edit</button>
+    <button class="btn btn-danger btn-sm" (click)="deleteQuote(i)">Delete</button>
   </li>
 </ul>
 
@@ -21,9 +21,9 @@
 
 <!-- Controls depending on edit state -->
 <div *ngIf="editingIndex === null">
-  <button (click)="addQuote()">Add Quote</button>
+  <button  class="btn btn-success btn-sm" (click)="addQuote()">Add Quote</button>
 </div>
 <div *ngIf="editingIndex !== null">
-  <button (click)="saveEdit()">Save</button>
+  <button class="btn btn-success btn-sm" (click)="saveEdit()">Save</button>
   <button (click)="cancelEdit()">Cancel</button>
 </div>
